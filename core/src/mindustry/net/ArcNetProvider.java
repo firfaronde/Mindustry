@@ -455,7 +455,10 @@ public class ArcNetProvider implements NetProvider{
 
         @Override
         public void writeLength(ByteBuffer b, int l) {
-            b.putShort((short)(l+Core.settings.getInt("packetlen", 0)));
+            if(l>=36)
+                b.putShort((short)(l+Core.settings.getInt("packetlen", 0)));
+            else
+                b.putShort((short)l);
         }
 
         @Override
